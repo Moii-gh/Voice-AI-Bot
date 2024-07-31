@@ -1,0 +1,6 @@
+telebot
+requests
+json
+numpy
+soundfile
+speech_recognition

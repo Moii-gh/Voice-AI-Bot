@@ -2,6 +2,7 @@ import requests
 import numpy as np
 import soundfile as sf
 import speech_recognition as sr
+from config import language
 
 def download_file(file_url):
     file_path = "voice_message.ogg"
@@ -20,7 +21,7 @@ def progress_audio_file(file_path):
     with sr.AudioFile(file_path) as source:
         audio_data = recognizer.listen(source)
     try:
-        text = recognizer.recognize_google(audio_data, language="ru-RU")
+        text = recognizer.recognize_google(audio_data, language)
         return text
     except sr.UnknownValueError:
         return None

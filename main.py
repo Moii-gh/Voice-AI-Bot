@@ -1,5 +1,5 @@
 from telebot import TeleBot, types
-import os
+import re
 from keyboards import get_main_keyboard
 from gpt import GPT
 from audio_utils import download_file, convert_to_pcm16, progress_audio_file
@@ -74,6 +74,7 @@ def callback_query(call):
             bot.send_message(chat_id, response)
         elif call.data == "timecodes":
             bot.answer_callback_query(call.id, "Данная функция пока не работает")
+
         elif call.data == "to_answer":
              messages = [
                 {
@@ -85,11 +86,10 @@ def callback_query(call):
              bot.send_message(chat_id, response)
         elif call.data == "lang":
             bot.send_message(chat_id, "Пока я говорю только известных мне языках, но если вам нужно, я постараюсь использовать все свои способности, чтобы понять и говорить на вашем языке <b>попозже</b>.", parse_mode="HTML")
+    
     else:
         bot.send_message(chat_id, "Текст для пересказа не найден.")
-
 
 if __name__ == "__main__":
     bot.delete_webhook()
     bot.polling()
-    print("Бот запущен!!!")
